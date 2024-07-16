@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BusinessInfo = () => {
+const BusinessInfo:React.FC = () => {
   return (
     <div>BusinessInfo</div>
   )

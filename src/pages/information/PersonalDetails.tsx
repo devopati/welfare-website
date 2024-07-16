@@ -2,11 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BUSINESS_INFO, INFORMATION } from '../../constants/routeNames'
 
-const PersonalDetails = () => {
+const PersonalDetails:React.FC = () => {
   const navigate = useNavigate()
   return (
-    <div>
-         <form className="w-full max-w-2xl shadow-lg p-14">
+    <div className='bg-white'>
+         <form className="w-full max-w-2xl shadow-lg pl-8 pr-8 pb-3 pt-3">
             <h3 className='text-center pb-14 font-bold'>PERSONAL DETAILS</h3>
     <div className="flex flex-wrap -mx-3 mb-6">
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">

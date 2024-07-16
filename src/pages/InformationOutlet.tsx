@@ -1,9 +1,9 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-const InformationOutlet = () => {
+const InformationOutlet:React.FC = () => {
   return (
-    <div className='flex h-dvh items-center justify-center'>
+    <div className='flex h-dvh items-center justify-center px-4'>
        <Outlet/>
         </div>
   )

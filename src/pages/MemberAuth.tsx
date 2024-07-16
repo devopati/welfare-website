@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate,NavigateProps } from 'react-router-dom'
 import { INFORMATION, PERSONAL_DETAILS } from '../constants/routeNames'
 
-const MemberAuth = () => {
+const MemberAuth:React.FC = () => {
     const navigate = useNavigate()
   return (
   <div className="flex items-center justify-center h-dvh">
