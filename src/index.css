@@ -5,4 +5,6 @@
 .main-div {
     background: rgb(85,101,142);
 background: radial-gradient(circle, rgba(85,101,142,1) 0%, rgba(55,126,215,0.26952030812324934) 100%, rgba(255,0,0,1) 100%);
+padding-bottom: 224px;
+padding-top: 40px;
 }

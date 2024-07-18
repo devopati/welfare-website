@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, } from 'react-router-dom'
-import { INFORMATION, VERIFICATION } from '../constants/routeNames'
+import { CONFIRM_NUMBER, INFORMATION } from '../constants/routeNames'
 import { toast } from 'react-toastify'
 import { BACKEND_URL } from '../constants/BackendUrl'
 import axios from 'axios'
@@ -19,16 +19,16 @@ const MemberAuth:React.FC = () => {
       if(!memberNo) return toast.error("A member number is required to continue")
       try {
         setIsLoading(true)
-        const URL = `${BACKEND_URL}/get-otp`
+        const URL = `${BACKEND_URL}/get-phone`
         const res = await axios.post(URL,{member_number:memberNo})
-        dispatch(setPhoneNumber(res.data?.phone_number))
         dispatch(setMemberNumber(memberNo))
+        dispatch(setPhoneNumber(res.data?.phone_number))
 
-        navigate(INFORMATION+"/"+VERIFICATION)
-        toast.success("OTP sent to your number, please confirm to continue")
+        navigate(INFORMATION+"/"+CONFIRM_NUMBER)
+        toast.success("Please confirm your phone number to continue")
       } catch (error:any) {
         console.log(error)
-        toast.error(error?.response?.data?.msg || "An error occurred while sending OTP, please try again.");
+        toast.error(error?.response?.data?.msg || "An error occurred while processing you request");
         
       }finally{
         setIsLoading(false)
@@ -42,6 +42,7 @@ const MemberAuth:React.FC = () => {
       <label className="block text-gray-700 text-2xl font-bold mb-2" htmlFor="member-no">
         Membership Number:
       </label>
+      <h4>Please provide a membership number to continue<br/><br/></h4>
       <input value={memberNo} onChange={(e)=>setMemberNo(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="member-no" type="text" placeholder="Member No."/>
       <p className="text-red-500 text-xs italic">Member no. is required</p>
     </div>
