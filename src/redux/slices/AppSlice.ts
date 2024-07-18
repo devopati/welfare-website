@@ -11,7 +11,7 @@ interface AppState {
 }
 const initialState:AppState = {
     phone_number:"",
-    member_number:"",
+    member_number:JSON.parse(localStorage.getItem("member_no")) ?? "",
     member_details:{},
     email:"",
     business_type:"",
@@ -28,6 +28,7 @@ const AppSlice = createSlice({
         },
     setMemberNumber: (state:AppState, action:PayloadAction<string>) => {
         state.member_number = action.payload;
+        localStorage.setItem("member_no",JSON.stringify(action.payload))
         },
     setMemberDetails:(state:AppState, action:PayloadAction<object>)=>{
         state.member_details = action.payload;
