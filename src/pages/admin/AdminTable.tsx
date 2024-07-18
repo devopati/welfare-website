@@ -1,7 +1,19 @@
 import React from 'react'
 import Button from '../../components/Button'
+import GeneratePDF from '../../utils/GeneratePDF'
 
-const AdminTable = () => {
+// interface propTypes{
+//     members:object,
+//     currentPage:number,
+//     totalPages:number,
+//     totalMembers:number
+// }
+
+type PropTypes = {
+    resData:any
+}
+
+const AdminTable:React.FC<PropTypes> = ({resData}) => {
   return (
     <div>
         <div className="flex flex-col rounded-sm xl:mx-14 :mx-6 border border-blue-800">
@@ -24,20 +36,27 @@ const AdminTable = () => {
             </tr>
         </thead>
         <tbody>
-            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            {
+                resData?.members?.map((member:any) => {
+                    return (
+                        
+                        <tr key={member?._id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    MNO.0345
+                   {member?.member_no}
                 </th>
                 <td className="px-6 py-4">
-                    David Opati
+                    {member?.name}
                 </td>
                 <td className="px-6 py-4">
-                   0799146814
+                   {member?.phone_number}
                 </td>
                 <td className="px-6 py-4">
-                    <Button onClick={()=>{}}/>
+                    <GeneratePDF/>
                 </td>
             </tr>
+                    )
+            })
+        }
             
         </tbody>
     </table>

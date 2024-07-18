@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { BUSINESS_INFO, INFORMATION } from '../../constants/routeNames'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { ADMIN, BUSINESS_INFO, INFORMATION } from '../../constants/routeNames'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/reduxhooks'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -25,6 +25,10 @@ const PersonalDetails:React.FC = () => {
       dispatch(setEmailAndBusinessType({email,business_type:businessType}))
       navigate(INFORMATION+"/"+BUSINESS_INFO)
       toast.success("Information updated, please proceed")
+  }
+
+  if(member_details?.is_admin === true){
+    return <Navigate to={INFORMATION+"/"+ADMIN} replace/>
   }
 
 

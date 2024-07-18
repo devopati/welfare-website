@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { INFORMATION, PERSONAL_DETAILS } from '../constants/routeNames'
-import { useNavigate } from 'react-router-dom'
+import { ADMIN, INFORMATION, PERSONAL_DETAILS } from '../constants/routeNames'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxhooks'
 import { BACKEND_URL } from '../constants/BackendUrl'
 import axios from 'axios'
@@ -26,9 +26,13 @@ const OtpVerification:React.FC = () => {
       dispatch(setMemberDetails(res.data?.member_details))
 
       toast.success("OTP verified successfuly, proceed")
+
+      if(res.data?.member_details?.is_admin){
+        navigate(INFORMATION+"/"+ADMIN)
+      }
       navigate(INFORMATION+"/"+PERSONAL_DETAILS)
     } catch (error:any) {
-      console.log(error)
+      // console.log(error)
       toast.error(error?.response?.data?.msg || "An error occurred while sending OTP, please try again.");
     }finally{
       setIsLoading(false)
@@ -45,7 +49,7 @@ const OtpVerification:React.FC = () => {
         
       </label>
         <small>Enter the otp sent to you phone number:</small>
-        <h5 className='text-sm font-bold'>{"07*******"+phone_number.substring(10,8)}</h5>
+        <h5 className='text-sm font-bold'>{phone_number[0]+phone_number[1]+phone_number[2]+"*******"+phone_number.substring(10,8)}</h5>
       <input value={otp} onChange={(e)=>setOtp(e.target.value)} className="shadow appearance-none border text-center font-bold rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="otp" type="text" placeholder="otp"/>
       <p className="text-red-500 text-xs italic">Otp is required</p>
     </div>
