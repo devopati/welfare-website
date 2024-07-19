@@ -9,9 +9,11 @@ interface AppState {
     dealer_info: object,
     general_info:object
 }
+
+
 const initialState:AppState = {
     phone_number:"",
-    member_number:JSON.parse(localStorage.getItem("member_no")) ?? "",
+    member_number:"",
     member_details:{},
     email:"",
     business_type:"",
@@ -30,10 +32,10 @@ const AppSlice = createSlice({
         state.member_number = action.payload;
         localStorage.setItem("member_no",JSON.stringify(action.payload))
         },
-    setMemberDetails:(state:AppState, action:PayloadAction<object>)=>{
+    setMemberDetails:(state:AppState, action:PayloadAction<any>)=>{
         state.member_details = action.payload;
     },
-    setEmailAndBusinessType:(state:AppState,action:PayloadAction<object>)=>{
+    setEmailAndBusinessType:(state:AppState,action:PayloadAction<{email:string,business_type:string}>)=>{
         state.email = action.payload?.email;
         state.business_type = action.payload?.business_type
     },

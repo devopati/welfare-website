@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ADMIN, INFORMATION, PERSONAL_DETAILS } from '../constants/routeNames'
-import { Navigate, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxhooks'
 import { BACKEND_URL } from '../constants/BackendUrl'
 import axios from 'axios'

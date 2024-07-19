@@ -7,10 +7,18 @@ import 'react-dropdown/style.css';
 import { toast } from 'react-toastify';
 import { setEmailAndBusinessType } from '../../redux/slices/AppSlice';
 
+interface MemberDetails {
+  name: string;
+  email: string;
+  phone_number: string;
+  member_no: string;
+  is_admin: boolean;
+}
+
 const PersonalDetails:React.FC = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const {member_details} = useAppSelector(state=>state.app)
+  const member_details = useAppSelector((state) => state.app.member_details as MemberDetails);
   
   const [firstName,setFirstName] = useState<string>(member_details?.name.split(" ")[0] || '')
   const [lastName,setLastName] = useState<string>(member_details?.name.split(" ")[1] || '')
@@ -42,13 +50,13 @@ const PersonalDetails:React.FC = () => {
         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
           First Name
         </label>
-        <input readOnly value={firstName} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="John"/>
+        <input readOnly value={firstName} onChange={(e)=>setFirstName(e.target.value)} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="John"/>
       </div>    
       <div className="w-full md:w-1/2 px-3">    
         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
           Last Name
         </label>
-        <input readOnly value={lastName} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe"/>
+        <input readOnly value={lastName} onChange={(e)=>setLastName(e.target.value)} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe"/>
       </div>
     </div>
     <div className="flex flex-wrap -mx-3 mb-6">
@@ -62,7 +70,7 @@ const PersonalDetails:React.FC = () => {
         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phone">
           Phone Number
         </label>
-        <input readOnly value={phone} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" type="text" placeholder="0722000000"/>
+        <input readOnly value={phone} onChange={e=>setPhone(e.target.value)} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" type="text" placeholder="0722000000"/>
       </div>
     </div>
     <div className="flex flex-wrap -mx-3 mb-6">

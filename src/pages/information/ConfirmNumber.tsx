@@ -7,15 +7,14 @@ import { toast } from 'react-toastify'
 import { BACKEND_URL } from '../../constants/BackendUrl'
 import axios from 'axios'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/reduxhooks'
-import { setMemberNumber, setPhoneNumber } from '../../redux/slices/AppSlice'
+import {  setPhoneNumber } from '../../redux/slices/AppSlice'
 
 const ConfirmNumber = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
-    const [memberNo,setMemberNo] = useState<string>("")
     const [phone,setPhone] = useState<string>("")
-    const [isError,setIsError] = useState<boolean>(false)
+    // const [isError,setIsError] = useState<boolean>(false)
     const [isLoading,setIsLoading] = useState<Boolean>(false)
 
     const {phone_number,member_number} = useAppSelector(state=>state.app)
@@ -24,7 +23,7 @@ const ConfirmNumber = () => {
       e.preventDefault()
       if(!phone) return toast.error("Provide a phone number that is shown to continue")
       if(phone !== phone_number){
-        setIsError(true)
+        // setIsError(true)
         toast.error("Phone number mismatch, contact us for any support")
         return
       }

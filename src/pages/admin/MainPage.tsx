@@ -29,6 +29,7 @@ const MainPage:React.FC = () => {
       setLoading(false)
     }
   },[])
+  console.log(loading)
 
   useEffect(()=>{
       getAllMembersDataAsync()

@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ADMIN, BUSINESS_INFO, CONFIRM_NUMBER, INFORMATION, MEMBER_AUTH, NEXT_OF_KIN, PERSONAL_DETAILS, THANK_YOU, VERIFICATION } from '../constants/routeNames'
 import MemberAuth from '../pages/MemberAuth'
 import InformationOutlet from '../pages/InformationOutlet'

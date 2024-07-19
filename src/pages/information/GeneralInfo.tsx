@@ -1,26 +1,22 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from '../../redux/hooks/reduxhooks'
-import { useNavigate } from 'react-router-dom'
-import Dropdown from 'react-dropdown';
+// import Dropdown from 'react-dropdown';
 
 const GeneralInfo:React.FC = () => {
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
 
-    const [nextOfKin,setNextOfKin] = useState<string>("parent")
-    const [isBiological,setIsBiological]= useState<string>("yes")
+    // const [nextOfKin,setNextOfKin] = useState<string>("parent")
+    // const [isBiological,setIsBiological]= useState<string>("yes")
     const [name,setName] = useState<string>("")
     const [phone,setPhone] = useState<string>("")
 
-    const general_info = {
-        next_of_kin:nextOfKin,
-        is_biological:isBiological === "yes" ? true : false,
-        name:name,
-        contact_no:phone
-    }
-    const updateDataHandler = ()=>{
+    // const general_info = {
+    //     next_of_kin:nextOfKin,
+    //     is_biological:isBiological === "yes" ? true : false,
+    //     name:name,
+    //     contact_no:phone
+    // }
+    // const updateDataHandler = ()=>{
 
-    }
+    // }
   return (
     <div>
          <div className=" w-96 ">
@@ -43,7 +39,7 @@ const GeneralInfo:React.FC = () => {
     </div>
 
    <div className="flex gap-10">
-   <div className=" -mx-1 mb-6 pt-6">
+   {/* <div className=" -mx-1 mb-6 pt-6">
 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="dealer-type">
           Who's your next of kin?
         </label>
@@ -54,11 +50,11 @@ const GeneralInfo:React.FC = () => {
           Is your next of kin biological?
         </label>
     <Dropdown options={["yes","no"]} onChange={(e)=>setIsBiological(e.value)} value={"Yes"} placeholder="Select an option" />
-      </div>
+      </div> */}
    </div>
    
     <div className=" items-center justify-between">
-      <button onClick={updateDataHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">
+      <button onClick={()=>{}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">
         Continue
       </button>
     
