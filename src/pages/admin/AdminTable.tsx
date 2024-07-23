@@ -20,6 +20,9 @@ const AdminTable:React.FC<PropTypes> = ({resData}) => {
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
+                <th>
+                    Profile pic
+                </th>
                 <th scope="col" className="px-6 py-3">
                     Member No.
                 </th>
@@ -40,6 +43,13 @@ const AdminTable:React.FC<PropTypes> = ({resData}) => {
                     return (
                         
                         <tr key={member?._id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <td>
+                                
+                           <a target="_blank" href={member?.profileImage?.imageUrl}>
+                           <img className="rounded-full w-14 h-14 border-slate-500 " src={member?.profileImage?.imageUrl} alt="image description"/>
+
+                           </a>
+                            </td>
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                    {member?.member_no}
                 </th>
@@ -52,7 +62,7 @@ const AdminTable:React.FC<PropTypes> = ({resData}) => {
                 <td className="px-6 py-4">
                     <GeneratePDF/>
                 </td>
-            </tr>
+                        </tr>
                     )
             })
         }

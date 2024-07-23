@@ -6,6 +6,8 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { toast } from 'react-toastify';
 import { setEmailAndBusinessType } from '../../redux/slices/AppSlice';
+import axios from 'axios';
+import { BACKEND_URL } from '../../constants/BackendUrl';
 
 interface MemberDetails {
   name: string;
@@ -25,14 +27,43 @@ const PersonalDetails:React.FC = () => {
   const [email,setEmail] = useState<string>(member_details?.email || '')
   const [businessType,setBusinessType] = useState<string>("dealer")
   const [phone,setPhone] = useState<string>(member_details?.phone_number || '')
+  const [image,setImage] = useState<File | null>(null)
 
-  const handleSetData = (e:React.MouseEvent<HTMLButtonElement>)=>{
+  const [isLoading,setIsLoading] = useState<boolean>(false)
+
+  // console.log(image)
+
+  const handleSetData = async (e:React.MouseEvent<HTMLButtonElement>)=>{
     e.preventDefault();
 
     if(!email) return toast.error("Email address is required to continue")
       dispatch(setEmailAndBusinessType({email,business_type:businessType}))
+
+    try {
+      setIsLoading(true)
+      const formData = new FormData();
+      formData.append("profile-pic", image as File);
+      formData.append("member_no",member_details.member_no)
+
+      const URL = `${BACKEND_URL}/upload-profile-pic`
+
+      const res = await axios.post(URL,formData,{
+          headers:{
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          }
+      })
+
+      console.log(res)
+      
       navigate(INFORMATION+"/"+BUSINESS_INFO)
       toast.success("Information updated, please proceed")
+    } catch (error) {
+      console.log(error)
+      toast.error("An error occurred while uploading details, please re-try")
+    }finally{
+      setIsLoading(false)
+    }
   }
 
   if(member_details?.is_admin === true){
@@ -89,12 +120,18 @@ const PersonalDetails:React.FC = () => {
 </div>
       </div>
 
+      
+<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Upload a profile image</label>
+<input onChange={(f:any)=>setImage(f.target.files[0])} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file"/>
+<p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+
+
 
       <div className="flex items-center justify-center mt-6 w-full">
       <button
       onClick={handleSetData}  
       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">
-        Continue
+        {isLoading ? "Processing...":"Continue"}
       </button>
     </div>
     </div>
